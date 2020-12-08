@@ -44,7 +44,7 @@ func (p *Process) Print() {
 
 func delete(processes []Process, id int) {
 	if len(processes) == 0 {
-		fmt.Println("No hay ningun proceso corriendo")
+		fmt.Println("No hay ningun proceso corriend")
 	} else {
 		for i, p := range processes {
 			if p.id == id {
