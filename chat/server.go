@@ -7,11 +7,13 @@ import (
 	"strings"
 )
 
+// Estructura del server
 type server struct {
 	rooms    room
 	commands chan command
 }
 
+// Constructor para el servidor
 func newServer() *server {
 	return &server{
 		rooms:    room{Name: "general", Members: nil, Messages: nil},
@@ -19,8 +21,10 @@ func newServer() *server {
 	}
 }
 
+// Función para correr el servidor
 func (s *server) run() {
 	for cmd := range s.commands {
+		// Según el comando recibido de un cliente es la función que ejecutara
 		switch cmd.id {
 		case CMD_NICK:
 			s.nick(cmd.client, cmd.args[1])
@@ -32,10 +36,12 @@ func (s *server) run() {
 	}
 }
 
+// Detiene el server y llama a que se guarden los mensajes en un archivo de texto
 func (s *server) stop() {
 	s.rooms.saveMessages()
 }
 
+// Se añade un cliente al servidor
 func (s *server) newClient(conn net.Conn) {
 	log.Printf("\nUn nuevo cliente se ha conectatdo al servidor: %s\n\r", conn.RemoteAddr().String())
 
@@ -49,6 +55,7 @@ func (s *server) newClient(conn net.Conn) {
 	c.readInput()
 }
 
+// Definimos el nombre de nuestro cliente
 func (s *server) nick(c *client, nick string) {
 	c.nick = nick
 	msg := "Bienvenido al chat general " + nick
@@ -56,6 +63,7 @@ func (s *server) nick(c *client, nick string) {
 	s.join(c, "general")
 }
 
+// Unimos al cliente a nuestra sala
 func (s *server) join(c *client, roomName string) {
 	r := &s.rooms
 	r.Members = append(r.Members, c)
@@ -65,12 +73,14 @@ func (s *server) join(c *client, roomName string) {
 	r.broadcast(c, string(msg))
 }
 
+// Se envia el mensaje de un cliente al resto, además de mostrarse en el servidor
 func (s *server) msg(c *client, args []string) {
 	msg := strings.Join(args[1:len(args)], " ")
 	log.Printf("Mensaje -> %s: %s", strings.TrimSpace(c.nick), msg)
 	c.room.broadcast(c, string(strings.TrimSpace(c.nick)+": "+msg))
 }
 
+// Función para que un cliente se desconecte
 func (s *server) quit(c *client) {
 	log.Printf("%s abandono el chat", strings.TrimSpace(c.nick))
 

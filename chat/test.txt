@@ -1,5 +1,0 @@
-[::1]:55008 n: Se ha unido a la sala n
-[::1]:55009 a: Se ha unido a la sala a
-[::1]:55009 a: a: culos
-[::1]:55008 n: n: anos
-[::1]:55008 n: n: estoy drogadisimo

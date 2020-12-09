@@ -1,0 +1,21 @@
+[::1]:56042 ana: Se ha unido a la sala ana
+[::1]:56043 jorge: Se ha unido a la sala jorge
+[::1]:56044 alex: Se ha unido a la sala alex
+[::1]:56044 alex: alex: heyyyy
+[::1]:56043 jorge: jorge: que onda
+[::1]:56042 ana: ana: oliiiii
+[::1]:56042 ana: ana: ya duermanseee
+[::1]:56042 ana: ana: eya es muy tarde
+[::1]:56043 jorge: jorge: jajaja atal vez pero estoy grabando algo
+[::1]:56044 alex: alex: que rgrabas?
+[::1]:56043 jorge: jorge: un proyecto
+[::1]:56043 jorge: jorge: ustedes que hace?
+[::1]:56044 alex: alex: contemplando mmi miseria
+[::1]:56042 ana: ana: estoy pensando que cenar
+[::1]:56042 ana: ana: que cereal me recomiendan?
+[::1]:56044 alex: alex: unos focokrispis
+[::1]:56043 jorge: jorge: uyyyyy
+[::1]:56043 jorge: jorge: esos estan buenisimos
+[::1]:56044 alex: alex: yasseeee
+[::1]:56042 ana: ana: si tiecreen?
+[::1]:56044 alex: alex: te lo juro

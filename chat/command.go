@@ -2,6 +2,7 @@ package main
 
 type commandID int
 
+// Definimos los comandos para los clientes
 const (
 	CMD_NICK commandID = iota
 	CMD_MSG
