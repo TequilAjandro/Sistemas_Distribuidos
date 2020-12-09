@@ -32,6 +32,10 @@ func (s *server) run() {
 	}
 }
 
+func (s *server) stop() {
+	s.rooms.saveMessages()
+}
+
 func (s *server) newClient(conn net.Conn) {
 	log.Printf("\nUn nuevo cliente se ha conectatdo al servidor: %s\n\r", conn.RemoteAddr().String())
 
@@ -43,7 +47,6 @@ func (s *server) newClient(conn net.Conn) {
 
 	c.msg(fmt.Sprintf("Te haz conectado al servidor\r"))
 	c.readInput()
-	// s.join(c, "general")
 }
 
 func (s *server) nick(c *client, nick string) {
@@ -63,14 +66,12 @@ func (s *server) join(c *client, roomName string) {
 }
 
 func (s *server) msg(c *client, args []string) {
-	// msg := c.nick + ": "
 	msg := strings.Join(args[1:len(args)], " ")
 	log.Printf("Mensaje -> %s: %s", strings.TrimSpace(c.nick), msg)
 	c.room.broadcast(c, string(strings.TrimSpace(c.nick)+": "+msg))
 }
 
 func (s *server) quit(c *client) {
-	// log.Printf("%s abandono el chat", c.conn.RemoteAddr().String())
 	log.Printf("%s abandono el chat", strings.TrimSpace(c.nick))
 
 	c.msg("Hasta luego\r")

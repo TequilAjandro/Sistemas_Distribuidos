@@ -4,7 +4,6 @@ type commandID int
 
 const (
 	CMD_NICK commandID = iota
-	CMD_JOIN
 	CMD_MSG
 	CMD_QUIT
 )
