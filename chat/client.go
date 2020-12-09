@@ -15,43 +15,30 @@ type client struct {
 }
 
 func (c *client) readInput() {
-	fmt.Println("Bienvenido")
 	for {
 		msg, err := bufio.NewReader(c.conn).ReadString('\n')
 		if err != nil {
 			return
 		}
 
-		msg = strings.Trim(msg, "\r\n")
-
+		msg = strings.Trim(msg, "\n")
 		args := strings.Split(msg, " ")
 		cmd := strings.TrimSpace(args[0])
 
 		switch cmd {
-		case "/nick":
+		case "-nick":
 			c.commands <- command{
 				id:     CMD_NICK,
 				client: c,
 				args:   args,
 			}
-		case "/join":
-			c.commands <- command{
-				id:     CMD_JOIN,
-				client: c,
-				args:   args,
-			}
-		case "/rooms":
-			c.commands <- command{
-				id:     CMD_ROOMS,
-				client: c,
-			}
-		case "/msg":
+		case "-msg":
 			c.commands <- command{
 				id:     CMD_MSG,
 				client: c,
 				args:   args,
 			}
-		case "/quit":
+		case "-quit":
 			c.commands <- command{
 				id:     CMD_QUIT,
 				client: c,
@@ -63,9 +50,9 @@ func (c *client) readInput() {
 }
 
 func (c *client) err(err error) {
-	c.conn.Write([]byte("err: " + err.Error() + "\n"))
+	c.conn.Write([]byte("err: " + err.Error() + "\n\r"))
 }
 
 func (c *client) msg(msg string) {
-	c.conn.Write([]byte("> " + msg + "\n"))
+	c.conn.Write([]byte("> " + msg + "\n\r"))
 }

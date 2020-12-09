@@ -1,18 +1,16 @@
 package main
 
-import (
-	"net"
-)
-
 type room struct {
-	name    string
-	members map[net.Addr]*client
+	Name     string
+	Members  []*client
+	Messages []string
 }
 
 func (r *room) broadcast(sender *client, msg string) {
-	for addr, m := range r.members {
-		if sender.conn.RemoteAddr() != addr {
+	for _, m := range r.Members {
+		if sender.nick != m.nick {
 			m.msg(msg)
 		}
 	}
+	r.Messages = append(r.Messages, (sender.conn.RemoteAddr().String() + " " + sender.nick + ": " + msg))
 }
